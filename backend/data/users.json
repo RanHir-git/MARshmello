@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "6693c0ac62157821fbb7cb3e"
+  },
+    "email": "admin@gamil.com",
+    "fullname": "Admin",
+    "password": "aaa",
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+},
+{
+  "_id": {
+    "$oid": "669ebd75f0de93587962c526"
+  },
+  "email": "test@gamil.com",
+  "password": "aaa",
+  "fullname": "test",
+  "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+}]

@@ -1,0 +1,71 @@
+:root {
+  --clr-bg-dark: #1f1f21;
+  --clr-bg-light: #ffffff;
+  --clr-txt-light: #cecfd2;
+  --clr-txt-dark: #0d0d0d;
+  --clr-scroll: #36382e;
+  --clr-scroll-hover: #4b4c52;
+
+  /* AppHeader */
+  --clr-ah-grey--1: #7e8188;
+  --clr-ah-grey: #434345;
+  --clr-ah-grey-1: #37373a;
+  --clr-ah-grey-2: #2c2c2e;
+
+  --clr-create-btn: #669df1;
+  --clr-create-btn-hover: #8fb8f6;
+  --clr-board-shadow: #111213;
+
+  /* HomePage */
+  --clr-home-btns: #0065ff;
+  --clr-home-btns-hover: #0747a6;
+  --clr-home-txt-light: #ffffff;
+  --home-header-shadow: rgba(0, 0, 0, 0.278);
+  --clr-second-home-header: #deebff;
+  --clr-bg-home-1: #ffffff;
+  --clr-bg-home-2: #f4f5f7;
+  --clt-home-input-border: #e0e2e7;
+
+  /* Board */
+  --clr-star-bg: rgba(0, 0, 0, 0.239);
+  --clr-default-board: #0079bf;
+  --add-board-shadow: rgba(0, 0, 0, 0.619);
+  --clr-input-add-board: #99c6ff;
+  --clr-input-add-board-hover: #df574d;
+  --gap: 0.8em;
+  --clr-close-board: #f87168;
+  --clr-close-board-hover: #fd9891;
+  --modal-box-shadow: 0px 2px 5px #202020;
+  --clr-modal-btn-hover: rgba(206, 206, 217, 0.07);
+
+  /* Group */
+  --clr-group: #101204;
+  --clr-group-txt: #a9abaf;
+  --clr-group-modal: #2b2c2f;
+  --group-width: 17rem;
+
+  /* Task */
+  --clr-task: #242528;
+  --clr-task-txt: #cecfd2;
+  --clr-bg-task-input: #242528;
+  --clr-task-txt-dark: #a9abaf;
+  --clr-task-late: #5d1f1a;
+  --clr-task-soon: #fbc828;
+  --clr-task-done: #94c748;
+
+  /* Login */
+  --clr-bg-login: #fafbfc;
+  --clr-login-txt-2: #5e6c84;
+  --clr-login-txt-1: #44546f;
+  --clr-login-txt: #172b4d;
+  --clr-login-btn: #0c66e4;
+  --clr-login-btn-hover: #0055cc;
+
+  /* Footer */
+  --clr-footer-bg: #172b4d;
+
+  /* AiChat */
+  --clr-chat: linear-gradient(135deg, #7d8aff, #131a5f);
+  --clr-chat-bg: #e0e5ea;
+  --clr-ai-msg: #d1d2d3;
+}

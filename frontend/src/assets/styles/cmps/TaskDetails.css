@@ -1,0 +1,211 @@
+@import '../setup/variables.css';
+
+/* import component-specific styles */
+@import './taskDetailsRelated/TaskDetailsHeader.css';
+@import './taskDetailsRelated/TaskDetailsActions.css';
+@import './taskDetailsRelated/TaskDetailsComments.css';
+@import './taskDetailsRelated/TaskDetailsDescription.css';
+@import './taskDetailsRelated/TaskDetailsData.css';
+@import './taskDetailsRelated/TaskDetailsChecklistManager.css';
+@import './taskDetailsRelated/TaskDetailsCover.css';
+@import './taskDetailsRelated/TaskDetailsPopup.css';
+
+/* import popup-related styles */
+@import './ColorPicker.css';
+@import './datePicker.css';
+
+/* modal backdrop */
+.task-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding-top: 5vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* modal content */
+.task-details {
+  background-color: #242528;
+  color: var(--clr-task-txt-dark);
+  border-radius: 8px;
+  padding: 2rem 0 2rem 0;
+  max-width: min(1080px, 90vw);
+  width: 100%;
+  max-height: calc(100vh - 10vh);
+  min-height: auto;
+  height: fit-content;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto auto auto auto;
+  row-gap: 1.5rem;
+  column-gap: 0;
+
+  /* border between row 1 and row 2 */
+  &::before {
+    content: '';
+    grid-column: 1 / -1;
+    grid-row: 2;
+    border-top: 1px solid #3c3d40;
+    margin-top: 0;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  & h2 {
+    margin: 0 0 1rem 0;
+    padding: 0;
+  }
+
+  & h5 {
+    padding: 0;
+    margin: 1rem 0 0.5rem 0;
+  }
+}
+
+.task-details h2{
+  color: var(--clr-task-txt);
+}
+
+.task-details-actions{
+  padding:0 2rem 0 2rem;
+}
+
+
+.task-details-row1-reserved {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.task-details-content {
+  grid-column: 1;
+  grid-row: 2 / -1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 10vh);
+  min-height: 30vh;
+  padding: 0;
+}
+
+.task-details-main {
+  display: flex;
+  flex-direction: column;
+  column-gap: 1rem;
+  min-height: 0;
+  padding: 0 2rem 0 2rem;
+}
+
+/* modal close button */
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #242528;
+  border: none;
+  font-size: 32px;
+  color: #c2c2c3;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0;
+  padding-bottom: 3px;
+  padding-left: 1px;
+  line-height: 1;
+  transition: background-color 0.2s, color 0.2s;
+  &:hover {
+    background-color: #2b2c2fea;
+    color: var(--clr-task-txt-dark);
+  }
+}
+
+/* modal spacer for extra bottom space */
+.modal-spacer {
+  height: 100px;
+}
+
+/* responsive: switch to flex layout on small screens */
+@media (max-width: 930px) {
+  .task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* hide the grid border */
+  .task-details::before {
+    display: none;
+  }
+
+  /* reset grid properties and set order for flex layout */
+  .task-details-cover {
+    grid-column: unset;
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  .task-details-content {
+    grid-column: unset;
+    grid-row: unset;
+    order: 2;
+    max-height: calc(100vh - 10vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 30vh;
+    padding: 0;
+  }
+
+  .task-details-comments {
+    grid-column: unset;
+    grid-row: unset;
+    order: 5; /* last element */
+    border-left: none;
+    border-top: 1px solid #3c3d40;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-height: calc(100vh - 25rem);
+    min-height: 28vh;
+  }
+}
+
+/* mobile/phone viewport fixes - ensures task-details is always visible */
+@media (max-width: 600px) {
+  .task-details-modal {
+    /* center modal content in viewport */
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .task-details {
+    /* ensure modal content is always in viewport, even with horizontal page scroll */
+    /* ensure modal content fits viewport */
+    max-width: calc(100vw - 2rem);
+    width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    margin: 0;
+    box-sizing: border-box;
+    /* prevent content overflow */
+    overflow-x: hidden;
+    /* ensure task-details stays centered in viewport regardless of page scroll position */
+    transform: translateX(0);
+    /* explicitly position to prevent off-screen placement */
+    position: relative;
+  }
+}

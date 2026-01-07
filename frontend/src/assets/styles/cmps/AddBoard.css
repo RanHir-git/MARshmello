@@ -1,0 +1,141 @@
+.add-board-card-container {
+  position: relative;
+
+  .add-board-card {
+    display: grid;
+    place-items: center;
+
+    position: relative;
+
+    border-radius: 12px;
+    box-shadow: 0 2px 0 var(--clr-board-shadow);
+    height: 100%;
+
+    font-size: 0.9rem;
+    background-color: var(--clr-ah-grey-2);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--clr-ah-grey-1);
+    }
+  }
+}
+
+.add-board-outlet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.add-board {
+  display: grid;
+  place-items: center;
+
+  position: fixed;
+  gap: 0.5rem;
+
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--add-board-shadow);
+  padding-inline: 1rem;
+  padding-block: 1rem;
+
+  background-color: var(--clr-ah-grey-2);
+
+  img {
+    width: 18px;
+  }
+
+  form {
+    display: grid;
+    gap: 0.5em;
+
+    width: 100%;
+
+    input {
+      padding-inline: 0.5em;
+      padding-block: 0.7em;
+      border: 1px solid var(--clr-input-add-board);
+      border-radius: 4px;
+
+      outline: none;
+
+      background-color: var(--clr-bg-dark);
+      color: var(--clr-txt-light);
+
+      &:focus {
+        border-color: var(--clr-input-add-board);
+      }
+
+      &:hover {
+        border-color: var(--clr-input-add-board-hover);
+      }
+    }
+
+    button {
+      padding: 0.6em 1em;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background-color: var(--clr-create-btn);
+      color: var(--clr-txt-dark);
+
+      &:hover:not(:disabled) {
+        background-color: var(--clr-create-btn-hover);
+      }
+
+      &:disabled {
+        background-color: var(--clr-ah-grey-1);
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .add-board-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    width: 100%;
+    margin-bottom: 1rem;
+
+    h2 {
+      grid-column: 2;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    .close-add-board {
+      justify-self: end;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--clr-ah-grey-1);
+        box-shadow: 0 0 0 4px var(--clr-ah-grey-1);
+        border-radius: 5px;
+      }
+    }
+  }
+
+  h3 {
+    justify-self: start;
+    font-size: 0.8rem;
+  }
+}
+
+.mini-board-preview {
+  height: 130px;
+  width: 80%;
+  border-radius: 5px;
+
+  background-color: var(--clr-default-board);
+
+  img {
+    width: 100%;
+  }
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

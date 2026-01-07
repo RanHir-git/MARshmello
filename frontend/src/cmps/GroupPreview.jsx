@@ -1,0 +1,176 @@
+import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+
+import { TaskList } from './TaskList'
+import { GroupActions } from './GroupActions'
+
+import { addTask, updateTask } from '../store/actions/task.actions'
+import { taskService } from '../services/task'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import moreIcon from '../assets/img/more.svg'
+import closeIcon from '../assets/img/close.svg'
+import { LightTooltip } from './LightToolTip'
+
+export function GroupPreview({ group, onUpdateGroup, archiveGroup }) {
+  const board = useSelector(storeState => storeState.boardModule.board)
+
+  const [groupToEdit, setGroupToEdit] = useState(group)
+  const [isActionsOpen, setIsActionsOpen] = useState(false)
+
+  const [task, setTask] = useState(taskService.getEmptyTask())
+  const [isAddingTask, setIsAddingTask] = useState(false)
+  const groupActionsRef = useRef(null)
+
+  useEffect(() => {
+    function handleClickOutside(ev) {
+      // Check if click is outside the actions menu AND outside the toggle button
+      if (
+        !groupActionsRef.current?.contains(ev.target) &&
+        !ev.target.closest('.group-header > button')
+      ) {
+        setIsActionsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // Group funcs //
+  function onArchiveGroup() {
+    onToggleActions()
+    archiveGroup(group)
+  }
+
+  function onToggleActions() {
+    setIsActionsOpen(prev => !prev)
+  }
+
+  function handleGroupChange({ target }) {
+    const value = target.value
+    setGroupToEdit(prevGroup => ({ ...prevGroup, title: value }))
+  }
+
+  function onUpdateGroupTitle() {
+    const { title } = groupToEdit
+    if (!title || group.title === title || !title.trim().length) {
+      return setGroupToEdit(prevGroup => ({ ...prevGroup, title: group.title }))
+    }
+    onUpdateGroup(groupToEdit)
+  }
+
+  // Task funcs //
+  async function handleSubmit(ev) {
+    ev.preventDefault()
+    await onAddTask()
+    setIsAddingTask(true)
+  }
+
+  async function onAddTask() {
+    setIsAddingTask(false)
+    if (!task.title) return
+
+    try {
+      await addTask(board, group, task)
+      setTask(taskService.getEmptyTask())
+    } catch (err) {
+      console.log('err:', err)
+      showErrorMsg('Failed to add')
+    }
+  }
+
+  async function archiveTask(task) {
+    try {
+      await updateTask(board, group.id, task.id, { archivedAt: Date.now() })
+      setTask(taskService.getEmptyTask())
+      showSuccessMsg('Card archived')
+    } catch (err) {
+      console.log('err:', err)
+      showErrorMsg('Failed to archive')
+    }
+  }
+
+  async function onToggleStatus(ev, task) {
+    ev.stopPropagation()
+
+    const newStatus = task.status === 'done' ? 'inProgress' : 'done'
+
+    try {
+      await updateTask(board, group.id, task.id, { status: newStatus })
+      setTask({ ...task, status: newStatus })
+    } catch (err) {
+      showErrorMsg('Failed to update task status')
+    }
+  }
+
+  function handleTaskChange({ target }) {
+    const value = target.value
+    setTask(prevTask => ({ ...prevTask, title: value }))
+  }
+
+  if (!group.tasks) return
+
+  return (
+    <section className="group-preview flex column">
+      <header className="group-header flex space-between">
+        <input
+          className="title-input"
+          onChange={handleGroupChange}
+          onBlur={onUpdateGroupTitle}
+          value={groupToEdit.title}
+        />
+        <button onClick={onToggleActions}>
+          <LightTooltip title="List actions">
+            <img src={moreIcon} alt="More actions" />
+          </LightTooltip>
+        </button>
+        {isActionsOpen && (
+          <GroupActions
+            onToggleActions={onToggleActions}
+            onArchiveGroup={onArchiveGroup}
+            setIsAddingTask={setIsAddingTask}
+            groupActionsRef={groupActionsRef}
+          />
+        )}
+      </header>
+
+      <SortableContext
+        items={group.tasks.length ? group.tasks.map(task => task.id) : []}
+        strategy={verticalListSortingStrategy}
+      >
+        <TaskList
+          group={group}
+          onToggleStatus={onToggleStatus}
+          archiveTask={archiveTask}
+        />
+      </SortableContext>
+
+      {!isAddingTask ? (
+        <button className="add-btn" onClick={() => setIsAddingTask(true)}>
+          Add a Card
+        </button>
+      ) : (
+        <form className="add-form" onSubmit={handleSubmit}>
+          <input
+            onChange={handleTaskChange}
+            onBlur={onAddTask}
+            placeholder="Enter a title"
+            autoFocus
+            value={task.title || ''}
+          />
+          <div className="form-btns flex">
+            <button className="btn" onMouseDown={handleSubmit}>
+              Add Card
+            </button>
+            <button type="button" onClick={() => setIsAddingTask(false)}>
+              <img src={closeIcon} alt="Close" />
+            </button>
+          </div>
+        </form>
+      )}
+    </section>
+  )
+}

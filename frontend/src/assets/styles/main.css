@@ -1,0 +1,51 @@
+/* Setup */
+@import 'setup/variables.css';
+@import 'setup/typography.css';
+
+/* Basics */
+@import 'basics/helpers.css';
+@import 'basics/layout.css';
+@import 'basics/base.css';
+
+/* pages */
+@import 'pages/HomePage.css';
+@import 'pages/BoardIndex.css';
+@import 'pages/BoardDetails.css';
+@import 'pages/LoginSignup.css';
+
+/* Components */
+
+/* App */
+@import 'cmps/AppHeader.css';
+@import 'cmps/AppFooter.css';
+@import 'cmps/UserMsg.css';
+@import 'cmps/Loader.css';
+
+/* Home */
+@import 'cmps/HomePageHeader.css';
+
+/* Board */
+@import 'cmps/BoardHeader.css';
+@import 'cmps/BoardList.css';
+@import 'cmps/BoardPreview.css';
+@import 'cmps/AddBoard.css';
+@import 'cmps/BoardSettings.css';
+@import 'cmps/ShareBoard.css';
+@import 'cmps/AiChat.css';
+@import 'cmps/FilterTasks.css';
+@import 'cmps/Activities.css';
+
+/* Group */
+@import 'cmps/GroupList.css';
+@import 'cmps/GroupPreview.css';
+@import 'cmps/GroupActions.css';
+
+/* task */
+@import 'cmps/TaskList.css';
+@import 'cmps/TaskPreview.css';
+@import 'cmps/TaskDetails.css';
+@import 'cmps/BackgroundContainer.css';
+
+/* mq */
+@import 'setup/mqHomePage.css';
+@import 'setup/mqBoard.css';

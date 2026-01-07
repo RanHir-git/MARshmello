@@ -1,0 +1,133 @@
+/* Color Picker Styles */
+.color-picker-menu {
+    width: 100%;
+    
+}
+
+.color-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+}
+
+.color-picker-header h4 {
+    margin-left: -2.5rem !important;
+    font-size: 16px;
+    color: var(--clr-task-txt-dark);
+    flex: 1;
+    text-align: center;
+}
+
+.color-picker-preview {
+    margin-bottom: 16px;
+    padding: 32px;
+    background-color: #18191A;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-picker-preview-color {
+    width: 100%;
+    height: 32px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.color-picker-body h5 {
+    margin: 16px 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-task-txt-dark);
+}
+
+.color-picker-body input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.color-picker-body input[type="text"]:focus {
+    outline: none;
+    border-color: #0079bf;
+}
+
+.color-picker-section {
+    margin-top: 16px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.color-swatch {
+    width: 100%;
+    aspect-ratio: 3 / 1.8;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.color-swatch:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.color-swatch.selected {
+    box-shadow: 0 0 0 3px #0079bf;
+    transform: scale(1.05);
+}
+
+.color-picker-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.color-picker-actions button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.color-picker-delete {
+    background-color: #e74c3c !important;
+    color: white !important;
+}
+
+.color-picker-delete:hover {
+    background-color: #c0392b !important;
+}
+
+.color-picker-actions button:last-child {
+    background-color: var(--clr-home-btns);
+    color: white;
+}
+
+.color-picker-actions button:last-child:hover {
+    background-color: #026aa7;
+}
+
+.color-picker-actions .color-picker-save{
+    background-color: var(--clr-home-btns);
+    color: white;
+    &:hover {
+        background-color: var(--clr-home-btns-hover);
+    }
+}
